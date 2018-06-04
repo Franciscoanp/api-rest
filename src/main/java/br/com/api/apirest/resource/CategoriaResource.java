@@ -19,7 +19,6 @@ public class CategoriaResource {
 	
 	@GetMapping
 	public List<Categoria> listarTodos() {
-		
 		return categoriaRepository.findAll();
 	}
 	
