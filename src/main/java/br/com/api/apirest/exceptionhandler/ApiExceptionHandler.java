@@ -2,7 +2,6 @@ package br.com.api.apirest.exceptionhandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
