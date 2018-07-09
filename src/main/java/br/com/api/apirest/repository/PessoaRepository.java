@@ -5,4 +5,6 @@ import br.com.api.apirest.model.Pessoa;
 
 public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
 
+	
+
 }
