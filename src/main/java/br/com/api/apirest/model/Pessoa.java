@@ -26,7 +26,7 @@ public class Pessoa implements Serializable {
 	private String nome;
 	
 	@NotNull
-	private boolean ativo;
+	private Boolean ativo;
 
 	@Embedded
 	private Endereco endereco;
