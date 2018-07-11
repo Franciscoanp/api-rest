@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.api.apirest.event.RecursoCriadoEvent;
 import br.com.api.apirest.model.Pessoa;
 import br.com.api.apirest.repository.PessoaRepository;
+import br.com.api.apirest.service.PessoaService;
 
 @RestController
 @RequestMapping("/pessoas")
@@ -33,6 +35,9 @@ public class PessoaResource {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
+	@Autowired
+	private PessoaService pessoaService;
+	
 	@GetMapping
 	public List<Pessoa> listarTodos() {
 		return pessoaRepository.findAll();
@@ -63,9 +68,7 @@ public class PessoaResource {
 	
 	@PutMapping("/{codigo}")
 	public ResponseEntity<Pessoa> atualizar(@PathVariable Long codigo, @Valid @RequestBody Pessoa pessoa) {
-		Pessoa pessoaSalva = pessoaRepository.findOne(codigo);
-		BeanUtils.copyProperties(pessoa, pessoaSalva, "codigo");
-		pessoaSalva = pessoaRepository.save(pessoa);
+		Pessoa pessoaSalva = pessoaService.atualizar(codigo, pessoa);
 		
 		return ResponseEntity.ok(pessoaSalva);
 	}
