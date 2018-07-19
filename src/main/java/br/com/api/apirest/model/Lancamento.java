@@ -17,14 +17,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "lancamento")
-public class Lancamento implements Serializable{
+public class Lancamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
+
 	private String descricao;
 
 	@Column(name = "data_vencimento")
@@ -38,7 +38,7 @@ public class Lancamento implements Serializable{
 	private String observacao;
 
 	@Enumerated(EnumType.STRING)
-	private TipoLancamento tipoLancamento;
+	private TipoLancamento tipo;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_categoria")
@@ -48,8 +48,12 @@ public class Lancamento implements Serializable{
 	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;
 
+	public Lancamento() {
+		super();
+	}
+
 	public Lancamento(Long codigo, String descricao, LocalDate dataVencimento, LocalDate dataPagamento,
-			BigDecimal valor, String observacao, TipoLancamento tipoLancamento, Categoria categoria, Pessoa pessoa) {
+			BigDecimal valor, String observacao, TipoLancamento tipo, Categoria categoria, Pessoa pessoa) {
 		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
@@ -57,7 +61,7 @@ public class Lancamento implements Serializable{
 		this.dataPagamento = dataPagamento;
 		this.valor = valor;
 		this.observacao = observacao;
-		this.tipoLancamento = tipoLancamento;
+		this.tipo = tipo;
 		this.categoria = categoria;
 		this.pessoa = pessoa;
 	}
@@ -110,12 +114,12 @@ public class Lancamento implements Serializable{
 		this.observacao = observacao;
 	}
 
-	public TipoLancamento getTipoLancamento() {
-		return tipoLancamento;
+	public TipoLancamento getTipo() {
+		return tipo;
 	}
 
-	public void setTipoLancamento(TipoLancamento tipoLancamento) {
-		this.tipoLancamento = tipoLancamento;
+	public void setTipo(TipoLancamento tipo) {
+		this.tipo = tipo;
 	}
 
 	public Categoria getCategoria() {
@@ -159,5 +163,4 @@ public class Lancamento implements Serializable{
 		return true;
 	}
 
-	
 }
