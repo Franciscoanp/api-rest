@@ -28,7 +28,7 @@ public class Pessoa implements Serializable {
 	private String nome;
 	
 	@NotNull
-	@JsonIgnore
+	@JsonIgnore //inserido para corrigir erro 500 ao inserir lancamento
 	private Boolean ativo;
 
 	@Embedded
