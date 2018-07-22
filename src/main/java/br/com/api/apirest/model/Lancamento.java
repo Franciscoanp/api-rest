@@ -48,24 +48,6 @@ public class Lancamento implements Serializable {
 	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;
 
-	public Lancamento() {
-		super();
-	}
-
-	public Lancamento(Long codigo, String descricao, LocalDate dataVencimento, LocalDate dataPagamento,
-			BigDecimal valor, String observacao, TipoLancamento tipo, Categoria categoria, Pessoa pessoa) {
-		super();
-		this.codigo = codigo;
-		this.descricao = descricao;
-		this.dataVencimento = dataVencimento;
-		this.dataPagamento = dataPagamento;
-		this.valor = valor;
-		this.observacao = observacao;
-		this.tipo = tipo;
-		this.categoria = categoria;
-		this.pessoa = pessoa;
-	}
-
 	public Long getCodigo() {
 		return codigo;
 	}

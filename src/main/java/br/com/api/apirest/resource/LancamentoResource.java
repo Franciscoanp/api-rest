@@ -19,14 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.api.apirest.event.RecursoCriadoEvent;
 import br.com.api.apirest.model.Lancamento;
 import br.com.api.apirest.repository.LancamentoRepository;
-import br.com.api.apirest.service.LancamentoService;
 
 @RestController
 @RequestMapping("/lancamentos")
 public class LancamentoResource {
-
-	@Autowired
-	private LancamentoService lancamentoService;
 
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
@@ -36,12 +32,12 @@ public class LancamentoResource {
 	
 	@GetMapping
 	public List<Lancamento> listarTodos() {
-		return lancamentoService.findAll();
+		return lancamentoRepository.findAll();
 	}
 
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Lancamento> buscarPeloCodigo(@PathVariable Long codigo) {
-		Lancamento lancamento = lancamentoService.buscarPeloCodigo(codigo);
+		Lancamento lancamento = lancamentoRepository.findOne(codigo);
 		
 		if(lancamento != null) {
 			return ResponseEntity.ok(lancamento);
