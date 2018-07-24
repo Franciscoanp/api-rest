@@ -8,10 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "pessoa")
@@ -28,7 +30,7 @@ public class Pessoa implements Serializable {
 	private String nome;
 	
 	@NotNull
-	@JsonIgnore //inserido para corrigir erro 500 ao inserir lancamento
+	//@JsonIgnore //inserido para corrigir erro 500 ao inserir lancamento
 	private Boolean ativo;
 
 	@Embedded
@@ -68,6 +70,12 @@ public class Pessoa implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	@JsonIgnore
+	@Transient
+	public boolean isInativo() {
+		return !this.ativo;
 	}
 
 	@Override
