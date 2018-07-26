@@ -26,6 +26,7 @@ import br.com.api.apirest.event.RecursoCriadoEvent;
 import br.com.api.apirest.exceptionhandler.AlgamoneyExceptionHandler.Erro;
 import br.com.api.apirest.model.Lancamento;
 import br.com.api.apirest.repository.LancamentoRepository;
+import br.com.api.apirest.repository.filter.LancamentoFilter;
 import br.com.api.apirest.service.LancamentoService;
 import br.com.api.apirest.service.exception.PessoaInexistenteOuInativaException;
 
@@ -47,8 +48,8 @@ public class LancamentoResource {
 	private MessageSource messageSource;
 	
 	@GetMapping
-	public List<Lancamento> listarTodos() {
-		return lancamentoRepository.findAll();
+	public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
+		return lancamentoRepository.filtrar(lancamentoFilter);
 	}
 
 	@GetMapping("/{codigo}")
