@@ -14,7 +14,6 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 @Table(name = "pessoa")
 public class Pessoa implements Serializable {
@@ -28,16 +27,24 @@ public class Pessoa implements Serializable {
 	@NotNull
 	@Size(min = 3, max = 20)
 	private String nome;
-	
+
 	@NotNull
-	//@JsonIgnore //inserido para corrigir erro 500 ao inserir lancamento
+	// @JsonIgnore //inserido para corrigir erro 500 ao inserir lancamento
 	private Boolean ativo;
 
 	@Embedded
 	private Endereco endereco;
 
 	public Pessoa() {
+
+	}
+
+	public Pessoa(Long codigo, String nome, Boolean ativo, Endereco endereco) {
 		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.ativo = ativo;
+		this.endereco = endereco;
 	}
 
 	public Long getCodigo() {
@@ -71,7 +78,7 @@ public class Pessoa implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	@JsonIgnore
 	@Transient
 	public boolean isInativo() {
@@ -103,6 +110,4 @@ public class Pessoa implements Serializable {
 		return true;
 	}
 
-	
-	
 }
